@@ -11,6 +11,11 @@ public class AddBandClick : MonoBehaviour
     private void Start()
     {
         addButton = GameObject.Find("Add Machine");
+        if (!PlayerPrefs.HasKey("Active Band Count"))
+        {
+            YsoCorp.GameUtils.YCManager.instance.OnGameStarted(1);
+            PlayerPrefs.SetInt("Active Band Count", 1);
+        }
     }
 
     void Update()
@@ -59,6 +64,11 @@ public class AddBandClick : MonoBehaviour
         MatchCMList.matchCMList.MatchList();
         BandPanelControl panelControl = GameObject.Find("Band Panel Manager").GetComponent<BandPanelControl>();
         panelControl.PanelActivator();
-
+        YsoCorp.GameUtils.YCManager.instance.OnGameFinished(true);
+        YsoCorp.GameUtils.YCManager.instance.OnGameStarted(BandListManager.bandList.Bands.FindAll(obj => obj.activeSelf).Count);
+    }
+    private void OnDisable()
+    {
+        PlayerPrefs.SetInt("Active Band Count", BandListManager.bandList.Bands.FindAll(obj => obj.activeSelf).Count);
     }
 }

@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class MatchCMList : MonoBehaviour
 {
     public static MatchCMList matchCMList;
 
     public List<GameObject> gameObjects;
+
+    public event Action<int> lastLevelCount;
 
     public Dictionary<int, List<GameObject>> levelObjects;
 
@@ -56,5 +59,6 @@ public class MatchCMList : MonoBehaviour
             int childIndex = go.transform.GetComponent<ActiveCM>().activeChildIndex + 1;
             levelObjects[childIndex].Add(go);
         }
+        lastLevelCount?.Invoke(levelObjects[5].Count); 
     }
 }

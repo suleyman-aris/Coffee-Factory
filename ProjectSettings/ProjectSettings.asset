@@ -887,7 +887,10 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   webGLPowerPreference: 2
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: YC_IOS14_SUPPORT;tenjin_applovin_enabled
+    Standalone: YC_IOS14_SUPPORT
+    iPhone: YC_IOS14_SUPPORT;tenjin_applovin_enabled
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
